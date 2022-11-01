@@ -1,0 +1,23 @@
+{
+    "name": "peppers/example-app",
+    "description": "Example application showcasing Peppers PHP framework core functionalities and how to use them",
+    "keywords": ["framework", "peppers", "mvc", "routing", "orm"],
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ricardo Sousa",
+            "email": "peppers.php.framework@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=8.1",
+        "peppers/framework": ">=v1.0"
+    }
+}

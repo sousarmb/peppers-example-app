@@ -1,0 +1,92 @@
+@section("welcome-to-peppers")
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        @yield("useBootstrapCss")
+        <title>Welcome To Peppers PHP Framework!</title>
+        <link rel="icon" href="/images/favicon-32x32.ico">
+        <style type="text/css">
+            header {
+                margin: 1.3rem 0;
+                padding: 0.3rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <header class="col">
+                        <a href="#" class="text-decoration-none">
+                            <img class="img-thumbnail float-start" src="/images/peppers-128x128.png" width="75px" height="75px"/>
+                            <span class="fs-1 ms-2">Welcome to <span style="color: green">Peppers</span> PHP Framework</span>
+                        </a>
+                    </header>
+                </div>
+            </div>
+        </div>
+        <main>
+            <div class="container">
+                <div class="row">
+                    <div class="col fs-4 mt-3">
+                        <p style="text-indent: 0.5rem; text-align: justify;">Peppers is a Web MVC PHP framework designed for the developer who focuses on separation of concerns first, building small units of work which can be pipelined together to provide a response to a request. It tries to be fully customizable, allowing the developer to create its own code for core tasks.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col fs-4 mt-3">
+                        <p class="border-bottom">Examples:</p>
+                        <ul>
+                            <li><a href="/routing/<?= date('Y-m-d') ?>/<?= date('H:i:s') ?>">Routing</a></li>
+                            <li><a href="/view-composition">View composition</a></li>
+                            <li><a href="/form/submission">Form submission</a></li>
+                            <li><a href="/form/validation">Input validation</a></li>
+                            <li><a href="/redirect">Redirect browser</a> to unregistered route (<span class="text-muted">check browser network console for HTTP redirect status code</span>)</li>
+                            <li><a href="/dependency-injection">Dependency injection</a>: factories, services, etc.</li>
+                            <li>Database models:
+                                <ul>
+                                    <li><a href="/model/create">Create</a></li>
+                                    <li><a href="/models?allow=read">Read</a></li>
+                                    <li><a href="/models?allow=update">Update</a></li>
+                                    <li><a href="/models?allow=delete">Delete</a></li>
+                                    <li><a href="/models?allow=deleted">Read deleted models</a></li>
+                                </ul>
+                            </li>
+                            <li>Local file system files:
+                                <ul>
+                                    <li><a href="/file/create-random">Create random in</a>&nbsp;<span class="text-muted">(check file contents after download)</span></li>
+                                    <li><a href="/file/upload">Upload to</a></li>
+                                    <li><a href="/download/asset">Download asset from</a></li>
+                                </ul>
+                            </li>
+                            <li>Events:
+                                <ul>
+                                    <li><a href="/events/block">Blocking</a></li>
+                                    <li><a href="/events/defer">Deferred</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <hr>
+                        <p>After trying out the examples check the code. Starting point is the <code>routes.php</code> file.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="mt-5 py-3 bg-light">
+            <div class="container">
+                <?= date('Y') ?> <a href="/"><span class="text-muted">Peppers PHP Framework</span></a>
+            </div>
+        </footer>
+        @yield("useBootstrapJs")
+    </body>
+</html>
+@endsection
+
+@section("useBootstrapCss")
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+@endsection
+
+@section("useBootstrapJs")
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+@endsection

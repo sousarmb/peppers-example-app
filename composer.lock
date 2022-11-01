@@ -1,0 +1,70 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "d449f10bae842fd49ffcced4288b83f4",
+    "packages": [
+        {
+            "name": "peppers/framework",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sousarmb/peppers-php-framework.git",
+                "reference": "6cff9608870deeffe76be969abf5069a7ced9481"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sousarmb/peppers-php-framework/zipball/6cff9608870deeffe76be969abf5069a7ced9481",
+                "reference": "6cff9608870deeffe76be969abf5069a7ced9481",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.1"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Peppers\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ricardo Sousa",
+                    "email": "peppers.php.framework@gmail.com"
+                }
+            ],
+            "description": "A basic Web MVC framework",
+            "keywords": [
+                "framework",
+                "mvc",
+                "orm",
+                "peppers",
+                "routing"
+            ],
+            "support": {
+                "issues": "https://github.com/sousarmb/peppers-php-framework/issues",
+                "source": "https://github.com/sousarmb/peppers-php-framework/tree/v1.0"
+            },
+            "time": "2022-10-22T14:43:32+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=8.1"
+    },
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
+}

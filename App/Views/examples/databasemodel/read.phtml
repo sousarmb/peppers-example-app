@@ -1,0 +1,46 @@
+@extends("examples.templates.base-template")
+
+@section("content")
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <?php foreach ($viewVariables->columns as $column) { ?>
+                            <th><?= $column ?></th>
+                        <?php } ?>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($viewVariables->models as $model) { ?>
+                        <tr>
+                            <?php foreach ($viewVariables->columns as $column) { ?>
+                                <td><?= $model->$column ?></td>
+                            <?php } ?>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Queries</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($viewVariables->conn->getQueries() as $query) { ?>
+                        <tr>
+                            <td><?= $query ?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@endsection

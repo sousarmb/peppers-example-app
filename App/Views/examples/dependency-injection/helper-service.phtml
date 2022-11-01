@@ -1,0 +1,20 @@
+@extends("examples.templates.base-template")
+
+@section("content")
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <p>Dependencies can be one of :</p>
+            <ul>
+                <li>Registered service classes</li>
+                <li>Plain old PHP classes</li>
+            </ul>
+            <p>Services are registered in the <code>services.php</code> file found in the <code>config</code> directory. They can be of type concrete or abstract.</p>
+            <p>Concrete implementations don't require providers and are not bound through an interface to the <code>ServiceLocator</code>.</p>
+            <p>Abstract implementations require service providers, which may be registered directly in the services registration file or in some other class. They can also be bound through the use of PHP interfaces, allowing the developer to code what service implementation to return from the service provider.</p>
+            <p><code>Helper</code> service output: <?= $viewVariables->serviceOutput ?></p>
+            <p>Feel free to checkout default service providers to learn and start making your own.</p>
+        </div>
+    </div>
+</div>
+@endsection

@@ -1,0 +1,31 @@
+@extends("examples.view.extended")
+@use("examples.view.used")
+
+@section("mainContent")
+<div class="row">
+    <div class="col">
+        <hr>
+        <p>This is the bottom document. This is the view file/section that was passed to the <code>View</code> class, it extends base template <code>&lt;DocumentRoot&gt;/App/Views/examples/view/extended.phtml</code></p
+        <p>Views can be composed using 2 mechanisms: </p>
+        <ul>
+            <li>extension <code>&commat;extends(<span class="text-muted">&quot;directory.otherDirectory.parsedHtmlFile&quot;</span>)</code></li>
+            <li>inclusion <code>&commat;use(<span class="text-muted">&quot;directory.otherDirectory.parsedHtmlFile&quot;</span>)</code></li>
+        </ul>
+        <p>All view content must be placed inside a section. Sections start with <code>&commat;section(&quot;namedSection&quot;)</code> on a new line and end end with <code>&commat;endsection</code> on a new line as well. Sections are defined on the view .phtml files.</p>
+        <p><code>&commat;extends()</code> tells Peppers the content is rendered &quot;top-to-bottom&quot; but retrieved from the file system in a &quot;bottom-to-top&quot; fashion. The 1st content that is rendered is the last extended content. To render content sections must be <code>&commat;yield(&quot;namedSection&quot;)</code>ed along the extension/use chain, inside <code>&commat;section()</code>s.</p>
+        <p><code>&commat;use()</code> tells Peppers to simply render (<code>&commat;yield(&quot;namedSection&quot;)</code>) the content &quot;in place&quot;.</p>
+        <p>Even though content is rendered in a "top-to-bottom" fashion, the view name that is passed to the <code>HTMLView</code> class is the bottom section, the start of the render. If other sections are declared along the extends/use chain those may also be <code>&commat;yield(&quot;namedSection&quot;)</code>ed.</p>
+        <p><u>Note</u>: duplicate section names are not allowed in the extends/use chain.</p>
+        <p><u>Note</u>: the top section of the document - the one that gets rendered 1st, usually the last <code>&commat;extends()</code> - must be named after the file name!</p>
+        <p>Peppers view rendering mechanism is regular expression based so:</p>
+        <ul>
+            <li><code>&commat;extends()</code>, <code>&commat;use()</code> should be called at the beginning of the file and must be on separate lines;</li>
+            <li>Double quotes in in <code>&commat;extends()</code>, <code>&commat;use()</code>, <code>&commat;yield()</code> or <code>&commat;section()</code> must be respected;</li>
+            <li>Only <code>&commat;section(&quot;namedSection&quot;)</code> needs to be terminated with <code>&commat;endsection</code>.</li>
+        </ul>
+        <p>PHP <code><?= htmlentities("<?php ... ?>") ?></code> code may also be used freely in the views.</p>
+        <hr>
+        @yield("used")
+    </div>
+</div>
+@endsection

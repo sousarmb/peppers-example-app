@@ -1,0 +1,52 @@
+@extends("examples.templates.base-template")
+
+@section("content")
+<div class="container">
+    <div class="row">
+        <div class="col fs-4 mt-3">
+            <p style="text-indent: 0.5rem; text-align: justify;">Request has two parameters:</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-9 fs-4 mt-3">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Value Sent</th>        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <code>$param1</code>
+                        </td>
+                        <td>
+                            <code><?= $viewVariables->param1 ?></code>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code>$param2</code>
+                        </td>
+                        <td>
+                            <code><?= $viewVariables->param2 ?></code>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col fs-4 mt-3">
+            <p>Routes file declaration:</p>
+            <code class="text-muted fs-6">
+                <?= htmlentities("Route::get('/routing/{param1}/{param2}', [App\Controllers\ExampleRouting::class, 'readFromRequest'])") ?><br/>
+                &nbsp;<?= htmlentities("->setPathExpression('param1', '.+')") ?><br/>
+                &nbsp;<?= htmlentities("->setPathExpression('param2', '.+')") ?><br/>
+                &nbsp;<?= htmlentities("->setAllowFreeQuery(false)") ?><br/>
+            </code>
+        </div>
+    </div>
+</div>
+@endsection

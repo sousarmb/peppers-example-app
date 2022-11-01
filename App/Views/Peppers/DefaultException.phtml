@@ -1,0 +1,28 @@
+@section("defaultSection")
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Peppers Exception | Message: <?= $viewVariables->message ?></title>
+    </head>
+    <body>
+        <h1>Peppers Exception: <?= $viewVariables->message ?></h1>
+        <?php if (!Settings::appInProduction()) { ?>
+            <h2>Code: <?= $viewVariables->code ?></h2>
+            <h3>Stack Trace: </h3>
+            <ul>
+                <?php foreach ($viewVariables->trace as $execution) { ?>
+                    <li>
+                        <ul>
+                            <li>File: <?= array_key_exists('file', $execution) ? $execution['file'] : 'N/A' ?></li>
+                            <li>Line: <?= array_key_exists('line', $execution) ? $execution['line'] : 'N/A' ?></li>
+                            <li>Function: <?= (array_key_exists('class', $execution) ? $execution['class'] . $execution['type'] : '') . $execution['function'] ?></li>
+                            <li>Arguments: <?= serialize($execution['args']) ?></li>
+                        </ul>
+                    </li>
+                <?php } ?>
+            </ul>
+        <?php } ?>
+    </body>
+</html>
+@endsection

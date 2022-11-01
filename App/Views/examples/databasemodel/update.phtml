@@ -1,0 +1,154 @@
+@extends("examples.templates.base-template")
+
+@section("content")
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <?php foreach ($viewVariables->columns as $column) { ?>
+                            <th><?= $column ?></th>
+                        <?php } ?>
+                            <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($viewVariables->models as $model) { ?>
+                        <tr>
+                            <?php foreach ($viewVariables->columns as $column) { ?>
+                                <td><?= $model->$column ?></td>
+                            <?php } ?>
+                            <td>
+                                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#updateModal" data-bs-name="<?= $model->name ?>" data-bs-email="<?= $model->email ?>">Update</button>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Queries</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($viewVariables->conn->getQueries() as $query) { ?>
+                        <tr>
+                            <td><?= $query ?></td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@yield("updateModal")
+@yield("jscode")
+@endsection
+
+@section("jscode")
+<script type="text/javascript">
+    var request = new XMLHttpRequest();
+    request.addEventListener("error", function () {
+        // hide the spinner
+        actionSpinner.classList.add("d-none");
+        alertMessage.textContent = "Request ended in error!";
+        alert.classList.remove("d-none");
+        updateButton.disabled = false;
+    });
+    request.addEventListener("loadend", function (event) {
+        // hide the spinner
+        actionSpinner.classList.add("d-none");
+        if (this.status === 205) {
+            // close the modal
+            bootstrap.Modal.getInstance(updateModal).hide();
+            // reload the document
+            location.reload();
+        } else {
+            alertMessage.textContent = "Request ended in error: " + this.response;
+            alert.classList.remove("d-none");
+        }
+
+        updateButton.disabled = false;
+    });
+    var updateModal = document.getElementById("updateModal");
+    var modalNameInput = updateModal.querySelector("#model-name");
+    var modalEmailInput = updateModal.querySelector("#model-email");
+    var actionSpinner = document.getElementById("action-spinner");
+    var alert = document.getElementById("alert");
+    var alertMessage = document.getElementById("alert-message");
+    updateModal.addEventListener('show.bs.modal', function (event) {
+        // hide alert message
+        alert.classList.add("d-none");
+        // button that triggered the modal
+        let button = event.relatedTarget;
+        // extract info from data-bs-* attributes
+        let name = button.getAttribute('data-bs-name');
+        let email = button.getAttribute('data-bs-email');
+        // update the modal's content.
+        modalNameInput.value = name;
+        modalEmailInput.value = email;
+        // ... for submission purposes
+        modalNameInput.setAttribute('data-bs-old-name', name);
+        modalNameInput.setAttribute('data-bs-old-email', email);
+    });
+    var updateButton = document.getElementById("updateButton");
+    updateButton.addEventListener('click', function (event) {
+        // update; extract info from data-bs-* attributes
+        let oldName = modalNameInput.getAttribute('data-bs-old-name');
+        let oldEmail = modalNameInput.getAttribute('data-bs-old-email');
+        request.open("POST", "<?= $viewVariables->formAction ?>/" + oldName + "/" + oldEmail);
+        request.setRequestHeader("Content-Type", "application/json");
+        let newName = modalNameInput.value;
+        let newEmail = modalEmailInput.value;
+        updateButton.disabled = true;
+        actionSpinner.classList.remove("d-none");
+        alert.classList.add("d-none");
+        request.send('{"name": "' + newName + '", "email": "' + newEmail + '"}');
+    });
+</script>
+@endsection
+
+@section("updateModal")
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="updateModelModalLabel">Update model</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <div id="alert" class="d-none alert alert-danger" role="alert">
+                        <span id="alert-message"></span>
+                    </div>
+                </div>
+                <form>
+                    <div class="mb-3">
+                        <label for="model-name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control" id="model-name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="model-email" class="col-form-label">Email:</label>
+                        <input type="text" class="form-control" id="model-email"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="updateButton" type="button" class="btn btn-primary">Update&nbsp;
+                    <!-- this element is hidden, only shown when xmlhttp request is loading -->
+                    <div id="action-spinner" class="d-none spinner-border spinner-border-sm" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

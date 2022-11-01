@@ -1,0 +1,23 @@
+@section("generic-error-list")
+<?php if ($viewVariables->has('errors')) { ?>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <p>Validation errors found:</p>
+                <?php foreach ($viewVariables->errors as $field => $errors) { ?>
+                    <ul>
+                        <li>
+                            <?= $field ?>
+                            <ul>
+                                <?php foreach ($errors as $error) { ?>
+                                    <li><?= $error ?></li>
+                                <?php } ?>
+                            </ul>
+                        </li>
+                    </ul>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+@endsection

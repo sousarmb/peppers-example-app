@@ -1,0 +1,28 @@
+@extends("examples.templates.base-template")
+@use("examples.forms.generic-error-list")
+
+@section("content")
+<div class="container">
+    <form action="<?= $viewVariables->action ?>" method="POST">
+        <div class="row">
+            <div class="col-6">
+                <label class="form-label" for="name">Name</label>
+                <input class="form-control" type="text" id="name" name="name">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <label class="form-label" for="name">Email</label>
+                <input class="form-control" type="text" id="email" name="email">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <hr>
+                <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+@yield("generic-error-list")
+@endsection
